@@ -140,3 +140,57 @@ void dijkstra(DirectedWeightedGraph graph, vector<int> &allDistances, int source
 
     allDistances = distances;
 }
+
+int dijkstra(DirectedWeightedGraph graph, int source, int destination)
+{
+    int nodeCount = graph.get_nodeCount();
+    // Create set to store vertices
+    // Use this to extract the shortest path
+    set<pair<int, int>> nodes;
+
+    // Vector for distances
+    // All paths are initialized to a large value
+    vector<int> distances(nodeCount, INT_MAX);
+
+    // Insert the entry point into the set
+    // Initialize distance to 0
+    nodes.insert(make_pair(0, source));
+    distances[source] = 0;
+
+    // Continue until all shortest distances are finalized
+    while (!nodes.empty())
+    {
+        // Extract the minimum distances
+        pair<int, int> temporaryNode = *(nodes.begin());
+        nodes.erase(nodes.begin());
+
+        // Get the vertex number
+        int source = temporaryNode.second;
+
+        // Go over the adjacency list
+        for (auto i = graph.adjacencyList[source].begin(); i != graph.adjacencyList[source].end(); i++)
+        {
+            // Get the vertex and weight
+            int currentDestination = (*i).first;
+            int weight = (*i).second;
+
+            // Check if we have found a shorter path to v
+            if (distances[currentDestination] > distances[source] + weight)
+            {
+
+                // Remove the current distance if it is in the set
+                if (distances[currentDestination] != INT_MAX)
+                {
+                    nodes.erase(nodes.find(make_pair(distances[currentDestination], currentDestination)));
+                }
+
+                // Update the distance
+                distances[currentDestination] = distances[source] + weight;
+                nodes.insert(make_pair(distances[currentDestination], currentDestination));
+            }
+        }
+    }
+
+    // Shortest path weight from source to destination
+    return distances[destination];
+}

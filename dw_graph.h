@@ -48,12 +48,10 @@ public:
 
     bool is_edge(int source, int destination);
 
-    int dijkstra(int source, int destination);
-    int dijkstra(int destination);
-
     void printGraph();
 
     friend void dijkstra(DirectedWeightedGraph graph, vector<int> & allDistances, int source);
+    friend int dijkstra(DirectedWeightedGraph graph, int source, int destination);
     
     ~DirectedWeightedGraph();
 };

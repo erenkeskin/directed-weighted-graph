@@ -24,10 +24,12 @@ class DirectedWeightedGraph
 {
 private:
     int totalNodeCount;
+    bool visited = false;
+    bool marked = false;
 
 public:
     vector<vector<pair<int, int>>> adjacencyList;
-    
+
     DirectedWeightedGraph();
     DirectedWeightedGraph(int nodeCount);
     DirectedWeightedGraph(vector<Edge> &edges, int nodeCount);
@@ -35,8 +37,15 @@ public:
     void set_nodeCount(int nodeCount) { totalNodeCount = nodeCount; };
     int get_nodeCount(void) { return totalNodeCount; };
 
-    void add_edge(int source, int destination, int weight);
-    void add_edge(vector<Edge> &edges);
+    int add_edge(int source, int destination, int weight);
+    int add_edge(vector<Edge> &edges);
+
+    int remove_edge(int source, int destination);
+
+    bool is_edge(int source, int destination);
+
+    int dijkstra(int source, int destination);
+    int dijkstra(int destination);
 
     void printGraph();
     ~DirectedWeightedGraph();

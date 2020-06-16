@@ -41,6 +41,8 @@ int main()
     di_graph.add_edge(2, 4, 6);
 
     printGraph(di_graph);
+    cout << "--------------------------------------" << endl;
+    cout << "--------------------------------------" << endl;
 
     DirectedWeightedGraph di_graph2(nodeCount);
 
@@ -50,6 +52,9 @@ int main()
     di_graph2.add_edge(4, 1, 6);
 
     printGraph(di_graph2);
+    cout << "--------------------------------------" << endl;
+    cout << "--------------------------------------" << endl;
+
 
     DirectedWeightedGraph di_graph3;
     di_graph3.set_nodeCount(nodeCount);
@@ -58,6 +63,15 @@ int main()
     di_graph3.add_edge(edges);
 
     printGraph(di_graph3);
+    cout << "--------------------------------------" << endl;
+    cout << "--------------------------------------" << endl;
+
+
+    di_graph.remove_edge(1, 2);
+    printGraph(di_graph);
+    cout << "--------------------------------------" << endl;
+    cout << "--------------------------------------" << endl;
+
 
     // -------------------------------------------------
     // -------------------------------------------------

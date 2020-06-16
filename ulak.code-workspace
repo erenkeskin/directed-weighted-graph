@@ -1,0 +1,21 @@
+{
+    "settings": {
+        "files.associations": {
+            "list": "cpp",
+            "iostream": "cpp",
+            "vector": "cpp",
+            "set": "cpp",
+            "xutility": "cpp",
+            "queue": "cpp",
+            "utility": "cpp",
+            "xstddef": "cpp",
+            "xtree": "cpp",
+            "ostream": "cpp"
+        }
+    },
+    "folders": [
+        {
+            "path": "."
+        }
+    ]
+}

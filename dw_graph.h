@@ -2,6 +2,7 @@
 #define _DW_GRAPH_H
 
 #include <vector>
+#include <climits>
 
 using namespace std;
 
@@ -37,6 +38,9 @@ public:
     void set_nodeCount(int nodeCount) { totalNodeCount = nodeCount; };
     int get_nodeCount(void) { return totalNodeCount; };
 
+    int add_node();
+    int remove_node();
+
     int add_edge(int source, int destination, int weight);
     int add_edge(vector<Edge> &edges);
 
@@ -48,6 +52,9 @@ public:
     int dijkstra(int destination);
 
     void printGraph();
+
+    friend void dijkstra(DirectedWeightedGraph graph, vector<int> & allDistances, int source);
+    
     ~DirectedWeightedGraph();
 };
 

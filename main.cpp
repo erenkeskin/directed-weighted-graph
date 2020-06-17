@@ -1,6 +1,6 @@
 #include <iostream>
 #include <vector>
-#include "dw_graph.h"
+#include "test/test_digraph.cpp"
 
 using namespace std;
 
@@ -20,8 +20,12 @@ void printGraph(DirectedWeightedGraph &graph)
 }
 
 // Driver program to test methods of graph class
-int main()
+int main(int argc, char **argv)
 {
+    testing::InitGoogleTest(&argc, argv);
+    
+    if(RUN_ALL_TESTS() != 0) return -1;    
+
     // Create a graph given in the above diagram
     int nodeCount = 6;
 

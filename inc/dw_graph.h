@@ -50,7 +50,7 @@ public:
     bool is_edge(int source, int destination);
     bool is_acyclic(void);    // returns true if there is a cycle in this graph 
 
-    void printGraph();
+    void printGraph(void);
 
     friend void dijkstra(DirectedWeightedGraph graph, vector<int> & allDistances, int source);
     friend int dijkstra(DirectedWeightedGraph graph, int source, int destination);

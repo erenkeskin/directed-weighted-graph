@@ -1,4 +1,4 @@
-#include "../inc/dw_graph.h"
+#include "../include/dw_graph.h"
 #include <iostream>
 #include <set>
 #include <queue>

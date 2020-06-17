@@ -19,15 +19,3 @@
 *.i*86
 *.x86_64
 *.hex
-
-# CMake
-CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-_deps

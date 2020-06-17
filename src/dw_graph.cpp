@@ -1,25 +1,12 @@
 #include "../inc/dw_graph.h"
 #include <iostream>
-#include <algorithm>
 #include <set>
 #include <queue>
 #include <climits>
 
 using namespace std;
 
-DirectedWeightedGraph::DirectedWeightedGraph()
-{
-}
-
-DirectedWeightedGraph::DirectedWeightedGraph(vector<Edge> &edges, int nodeCount)
-{
-    set_nodeCount(nodeCount);
-    adjacencyList.resize(this->get_nodeCount());
-    for (auto edge : edges)
-    {
-        adjacencyList[edge.source].push_back(make_pair(edge.destination, edge.weight));
-    }
-}
+DirectedWeightedGraph::DirectedWeightedGraph() {}
 
 DirectedWeightedGraph::DirectedWeightedGraph(int nodeCount)
 {
@@ -27,36 +14,160 @@ DirectedWeightedGraph::DirectedWeightedGraph(int nodeCount)
     adjacencyList.resize(this->get_nodeCount());
 }
 
+DirectedWeightedGraph::DirectedWeightedGraph(vector<Edge> &edges, int nodeCount)
+{
+
+    set_nodeCount(nodeCount);
+    adjacencyList.resize(this->get_nodeCount());
+
+    for (auto edge : edges)
+    {
+        if (existance_check(edges) != 0)
+        {
+            return;
+        }
+        adjacencyList[edge.source].push_back(make_pair(edge.destination, edge.weight));
+    }
+}
+
 DirectedWeightedGraph::~DirectedWeightedGraph()
 {
-    // for (size_t n = 0; n < adjacencyList.size(); ++n)
-    // {
-    //     delete &adjacencyList[n];
-    // }
-    // delete &adjacencyList;
+    for (size_t n = 0; n < adjacencyList.size(); ++n)
+    {
+        adjacencyList[n].clear();
+        adjacencyList[n].shrink_to_fit();
+    }
+}
+
+void DirectedWeightedGraph::set_nodeCount(int nodeCount)
+{
+    totalNodeCount = nodeCount;
+    adjacencyList.resize(totalNodeCount);
+};
+
+int DirectedWeightedGraph::get_nodeCount(void)
+{
+    return totalNodeCount;
+};
+
+int DirectedWeightedGraph::existance_check(int source, int destination)
+{
+    int nodeCount = get_nodeCount();
+
+    //
+    if (nodeCount == -1)
+    {
+        return GRAPH_HAS_NOT_ANY_NODE;
+    }
+
+    //
+    if (source >= nodeCount)
+    {
+        return SOURCE_NODE_NOT_EXIST;
+    }
+
+    //
+    if (destination >= nodeCount)
+    {
+        return DESTINATION_NODE_NOT_EXIST;
+    }
+
+    return SUCCESS;
+}
+
+int DirectedWeightedGraph::existance_check(vector<Edge> &edges)
+{
+    int nodeCount = get_nodeCount();
+
+    //
+    if (nodeCount == -1)
+    {
+        return GRAPH_HAS_NOT_ANY_NODE;
+    }
+
+    for (auto edge : edges)
+    {
+        //
+        if (edge.source >= nodeCount)
+        {
+            return SOURCE_NODE_NOT_EXIST;
+        }
+
+        //
+        if (edge.destination >= nodeCount)
+        {
+            return DESTINATION_NODE_NOT_EXIST;
+        }
+    }
+
+    return SUCCESS;
 }
 
 int DirectedWeightedGraph::add_edge(int source, int destination, int weight)
 {
+    int exist = existance_check(source, destination);
+
+    if (exist != SUCCESS)
+    {
+        return exist;
+    }
+
+    //
+    for (int i = 0; i < adjacencyList[source].size(); i++)
+    {
+        if ((adjacencyList[source][i].first == destination) && (adjacencyList[source][i].second == weight))
+        {
+            return ALREADY_EXIST;
+        }
+        adjacencyList[source].push_back(make_pair(destination, weight));
+    }
+
     adjacencyList.resize(this->get_nodeCount());
     adjacencyList[source].push_back(make_pair(destination, weight));
 
-    return 0;
+    return SUCCESS;
 }
 
 int DirectedWeightedGraph::add_edge(vector<Edge> &edges)
 {
+    int exist = existance_check(edges);
+
+    if (exist != SUCCESS)
+    {
+        return exist;
+    }
+
     adjacencyList.resize(this->get_nodeCount());
+
     for (auto edge : edges)
     {
+        for (int i = 0; i < adjacencyList[edge.source].size(); i++)
+        {
+            if ((adjacencyList[edge.source][i].first == edge.destination) && (adjacencyList[edge.source][i].second == edge.weight))
+            {
+                return ALREADY_EXIST;
+            }
+        }
         adjacencyList[edge.source].push_back(make_pair(edge.destination, edge.weight));
     }
 
-    return 0;
+    return SUCCESS;
 }
 
 int DirectedWeightedGraph::remove_edge(int source, int destination)
 {
+    int exist = existance_check(source, destination);
+
+    if (exist != SUCCESS)
+    {
+        return exist;
+    }
+
+    if (!is_edge(source, destination))
+    {
+        return EDGE_NOT_EXIST;
+    }
+
     int index;
 
     for (int i = 0; i < adjacencyList[source].size(); i++)
@@ -68,15 +179,19 @@ int DirectedWeightedGraph::remove_edge(int source, int destination)
         }
     }
 
-    cout << "Position:" << index << endl;
-
     adjacencyList[source].erase(adjacencyList[source].begin() + index);
 
-    return 0;
+    return SUCCESS;
 }
 
 bool DirectedWeightedGraph::is_edge(int source, int destination)
 {
+    int exist = existance_check(source, destination);
+
+    if (exist != SUCCESS)
+    {
+        return false;
+    }
 
     for (int i = 0; i < adjacencyList[source].size(); i++)
     {
@@ -88,9 +203,21 @@ bool DirectedWeightedGraph::is_edge(int source, int destination)
     return false;
 }
 
-void dijkstra(DirectedWeightedGraph graph, vector<int> &allDistances, int source)
+int dijkstra(DirectedWeightedGraph graph, vector<int> &allDistances, int source)
 {
     int nodeCount = graph.get_nodeCount();
+
+    //
+    if (nodeCount == -1)
+    {
+        return GRAPH_HAS_NOT_ANY_NODE;
+    }
+    //
+    if (source >= nodeCount)
+    {
+        return SOURCE_NODE_NOT_EXIST;
+    }
+
     // Create set to store vertices
     // Use this to extract the shortest path
     set<pair<int, int>> nodes;
@@ -139,11 +266,21 @@ void dijkstra(DirectedWeightedGraph graph, vector<int> &allDistances, int source
     }
 
     allDistances = distances;
+
+    return SUCCESS;
 }
 
 int dijkstra(DirectedWeightedGraph graph, int source, int destination)
 {
     int nodeCount = graph.get_nodeCount();
+
+    int exist = graph.existance_check(source, destination);
+
+    if (exist != SUCCESS)
+    {
+        return exist;
+    }
+
     // Create set to store vertices
     // Use this to extract the shortest path
     set<pair<int, int>> nodes;
@@ -246,4 +383,17 @@ bool DirectedWeightedGraph::is_acyclic(void)
     }
 
     return false;
+}
+
+void printGraph(DirectedWeightedGraph graph)
+{
+    for (int i = 0; i < graph.get_nodeCount(); i++)
+    {
+        cout << "Source: " << i << " -> ";
+        for (auto p : graph.adjacencyList[i])
+        {
+            cout << "(Destination: " << p.first << ", Weight: " << p.second << ") ";
+        }
+        cout << endl;
+    }
 }

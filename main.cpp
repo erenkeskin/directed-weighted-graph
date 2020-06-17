@@ -23,7 +23,7 @@ void printGraph(DirectedWeightedGraph &graph)
 int main()
 {
     // Create a graph given in the above diagram
-    int nodeCount = 5;
+    int nodeCount = 6;
 
     vector<int> nodes = {0, 1, 2, 3, 4};
 
@@ -49,7 +49,7 @@ int main()
         {5, 0, 5},
     };
 
-    DirectedWeightedGraph di_graph(edges, nodeCount);
+    DirectedWeightedGraph di_graph(edges2, nodeCount);
 
     // di_graph.add_edge(2, 4, 6);
 
@@ -98,6 +98,11 @@ int main()
     }
 
     cout << dijkstra(di_graph, 0, 3) << endl;
+
+    if(di_graph.is_acyclic()) 
+        cout << "Graph contains cycle"; 
+    else
+        cout << "Graph doesn't contain cycle"; 
 
     // -------------------------------------------------
     // -------------------------------------------------

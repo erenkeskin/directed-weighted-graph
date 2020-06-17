@@ -194,3 +194,56 @@ int dijkstra(DirectedWeightedGraph graph, int source, int destination)
     // Shortest path weight from source to destination
     return distances[destination];
 }
+
+// This function is a variation of DFSUtil() in https://www.geeksforgeeks.org/archives/18212
+bool DirectedWeightedGraph::is_acyclicGraph(int visitingNode, bool visitedNode[], bool *recursiveStack)
+{
+    if (visitedNode[visitingNode] == false)
+    {
+        // Mark the current node as visited and part of recursion stack
+        visitedNode[visitingNode] = true;
+        recursiveStack[visitingNode] = true;
+
+        // Recur for all the vertices adjacent to this vertex
+        for (auto i = adjacencyList[visitingNode].begin(); i != adjacencyList[visitingNode].end(); i++)
+        {
+            if (!visitedNode[(*i).first] && is_acyclicGraph((*i).first, visitedNode, recursiveStack))
+            {
+                return true;
+            }
+            if (recursiveStack[(*i).first])
+            {
+                return true;
+            }
+        }
+    }
+    recursiveStack[visitingNode] = false; // remove the vertex from recursion stack
+    return false;
+}
+
+// Returns true if the graph contains a cycle, else false.
+bool DirectedWeightedGraph::is_acyclic(void)
+{
+    // Mark all the vertices as not visited and not part of recursion
+    // stack
+    int nodeCount = get_nodeCount();
+    bool *visitedNode = new bool[nodeCount];
+    bool *recursiveStack = new bool[nodeCount];
+
+    for (int i = 0; i < nodeCount; i++)
+    {
+        visitedNode[i] = false;
+        recursiveStack[i] = false;
+    }
+
+    // Call the recursive helper function to detect cycle in different
+    for (int i = 0; i < nodeCount; i++)
+    {
+        if (is_acyclicGraph(i, visitedNode, recursiveStack))
+        {
+            return true;
+        }
+    }
+
+    return false;
+}

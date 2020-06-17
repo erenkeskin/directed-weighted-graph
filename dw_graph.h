@@ -27,6 +27,7 @@ private:
     int totalNodeCount;
     bool visited = false;
     bool marked = false;
+    bool is_acyclicGraph(int visitingNode, bool visitedNode[], bool *recursiveStack);  // used by isCyclic() 
 
 public:
     vector<vector<pair<int, int>>> adjacencyList;
@@ -47,6 +48,7 @@ public:
     int remove_edge(int source, int destination);
 
     bool is_edge(int source, int destination);
+    bool is_acyclic(void);    // returns true if there is a cycle in this graph 
 
     void printGraph();
 

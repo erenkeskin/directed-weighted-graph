@@ -2,6 +2,7 @@
 #include <climits>
 #include "../include/dw_graph.h"
 
+// Generate Test Fixture
 class DiWeightedGraph : public testing::Test
 {
 public:
@@ -14,6 +15,7 @@ public:
     }
 };
 
+// Test for check graph get_nodeCount and set_nodeCount functions are okay
 TEST_F(DiWeightedGraph, genereate_graph_check_getter_setter_node_count)
 {
     DirectedWeightedGraph di_graph;
@@ -24,6 +26,7 @@ TEST_F(DiWeightedGraph, genereate_graph_check_getter_setter_node_count)
     ASSERT_EQ(di_graph.adjacencyList.size(), 5);
 }
 
+// Test for check generating graph with predefined size
 TEST_F(DiWeightedGraph, genereate_graph_with_constant_range)
 {
     DirectedWeightedGraph di_graph(5);
@@ -31,6 +34,8 @@ TEST_F(DiWeightedGraph, genereate_graph_with_constant_range)
     ASSERT_EQ(di_graph.adjacencyList.size(), 5);
 }
 
+// Test for check generating graph with an item vector
+// Item vector format => {source, destination, weight}
 TEST_F(DiWeightedGraph, genereate_graph_with_items)
 {
     vector<Edge> edges = {
@@ -47,6 +52,11 @@ TEST_F(DiWeightedGraph, genereate_graph_with_items)
     ASSERT_EQ(di_graph.adjacencyList.size(), 5);
 }
 
+// Test for checking edge exist from source to destination
+// If edge exist retval equal = SUCCESS => 0
+// If edge source part not exist retval equal = SOURCE_NODE_NOT_EXIST => -3
+// If edge destination part not exist retval equal = DESTINATION_NODE_NOT_EXIST => -4
+// If checking edge from empty node retval equal = GRAPH_HAS_NOT_ANY_NODE => -1
 TEST_F(DiWeightedGraph, existance_check)
 {
     DirectedWeightedGraph di_graph(5);
@@ -75,6 +85,11 @@ TEST_F(DiWeightedGraph, existance_check)
     ASSERT_EQ(retval, GRAPH_HAS_NOT_ANY_NODE);
 }
 
+// Test for checking edge exist for vector
+// If edge exist retval equal = SUCCESS => 0
+// If edge source part not exist retval equal = SOURCE_NODE_NOT_EXIST => -3
+// If edge destination part not exist retval equal = DESTINATION_NODE_NOT_EXIST => -4
+// If checking edge from empty node retval equal = GRAPH_HAS_NOT_ANY_NODE => -1
 TEST_F(DiWeightedGraph, existance_check_for_vectors)
 {
     vector<Edge> edges_source_not_exit = {
@@ -118,6 +133,8 @@ TEST_F(DiWeightedGraph, existance_check_for_vectors)
     ASSERT_EQ(retval, GRAPH_HAS_NOT_ANY_NODE);
 }
 
+// Test for adding new edge to graph from source to destination
+// add_edge(source, destination, weight)
 TEST_F(DiWeightedGraph, add_edge_with_from_source_to_destination)
 {
     DirectedWeightedGraph di_graph(5);
@@ -131,6 +148,7 @@ TEST_F(DiWeightedGraph, add_edge_with_from_source_to_destination)
     ASSERT_EQ(retval, 0);
 }
 
+// Test for adding new edge to graph from source to destination with existance - already exist edge
 TEST_F(DiWeightedGraph, add_edge_with_from_source_to_destination_existing_edge)
 {
     DirectedWeightedGraph di_graph(5);
@@ -147,6 +165,7 @@ TEST_F(DiWeightedGraph, add_edge_with_from_source_to_destination_existing_edge)
     ASSERT_EQ(retval, ALREADY_EXIST);
 }
 
+// Test for adding new edge to graph from source to destination with existance - not exist edge
 TEST_F(DiWeightedGraph, add_edge_with_from_source_to_destination_not_existing_node)
 {
     DirectedWeightedGraph di_graph(5);
@@ -169,6 +188,8 @@ TEST_F(DiWeightedGraph, add_edge_with_from_source_to_destination_not_existing_no
     ASSERT_EQ(retval, DESTINATION_NODE_NOT_EXIST);
 }
 
+// Test for adding new edge to graph with an vector
+// Item vector format => {source, destination, weight}
 TEST_F(DiWeightedGraph, add_edge_with_vector)
 {
     DirectedWeightedGraph di_graph(5);
@@ -191,6 +212,7 @@ TEST_F(DiWeightedGraph, add_edge_with_vector)
     ASSERT_EQ(retval, ALREADY_EXIST);
 }
 
+// Test for checking edge is really edge
 TEST_F(DiWeightedGraph, is_edge_from_source_to_destination)
 {
     DirectedWeightedGraph di_graph(5);
@@ -207,6 +229,7 @@ TEST_F(DiWeightedGraph, is_edge_from_source_to_destination)
     ASSERT_FALSE(di_graph.is_edge(source, 3));
 }
 
+// Test for checking edge is really edge - not existing node
 TEST_F(DiWeightedGraph, is_edge_from_source_to_destination_not_existing_node)
 {
     DirectedWeightedGraph di_graph(5);
@@ -219,6 +242,7 @@ TEST_F(DiWeightedGraph, is_edge_from_source_to_destination_not_existing_node)
     ASSERT_FALSE(di_graph.is_edge(0, 5));
 }
 
+// Test for remove edge from source to destination
 TEST_F(DiWeightedGraph, remove_edge_from_source_to_destination)
 {
     vector<Edge> edges = {
@@ -238,6 +262,7 @@ TEST_F(DiWeightedGraph, remove_edge_from_source_to_destination)
     ASSERT_EQ(retval, SUCCESS);
 }
 
+// Test for remove edge from source to destination - not existing node
 TEST_F(DiWeightedGraph, remove_edge_from_source_to_destination_not_existing_node)
 {
     vector<Edge> edges = {
@@ -260,6 +285,7 @@ TEST_F(DiWeightedGraph, remove_edge_from_source_to_destination_not_existing_node
     ASSERT_EQ(retval, DESTINATION_NODE_NOT_EXIST);
 }
 
+// Test for remove edge from source to destination - from not a real node
 TEST_F(DiWeightedGraph, remove_edge_from_source_to_destination_not_edge)
 {
     vector<Edge> edges = {
@@ -278,6 +304,7 @@ TEST_F(DiWeightedGraph, remove_edge_from_source_to_destination_not_edge)
     ASSERT_EQ(retval, EDGE_NOT_EXIST);
 }
 
+// Test for checking graph is acyclic
 TEST_F(DiWeightedGraph, is_acyclic)
 {
     vector<Edge> not_acyclic = {
@@ -314,6 +341,13 @@ TEST_F(DiWeightedGraph, is_acyclic)
     ASSERT_TRUE(acyclic_di_graph.is_acyclic());
 }
 
+// Test for checking graph shortest path with Dijkstra Algorithm from source to destination
+// Parameters: {graph, source, destination}
+// If edge source part not exist retval equal = SOURCE_NODE_NOT_EXIST => -3
+// If edge destination part not exist retval equal = DESTINATION_NODE_NOT_EXIST => -4
+// If checking edge from empty node retval equal = GRAPH_HAS_NOT_ANY_NODE => -1
+// If parameters okay, retval equal shortest path weight from source to destination
+// If shortest path is not exist from source to destination, retval equal = INT_MAX
 TEST_F(DiWeightedGraph, dijkstra_from_source_to_destination)
 {
     vector<Edge> edges = {
@@ -351,6 +385,9 @@ TEST_F(DiWeightedGraph, dijkstra_from_source_to_destination)
     ASSERT_EQ(retval, INT_MAX);
 }
 
+// Test for checking graph shortest path with Dijkstra Algorithm from source to all nodes
+// Parameters: {graph, shortest_distances, source}
+// If checking edge from empty node retval equal = GRAPH_HAS_NOT_ANY_NODE => -1
 TEST_F(DiWeightedGraph, dijkstra_from_source_to_all_nodes)
 {
     vector<Edge> edges = {
@@ -400,5 +437,4 @@ TEST_F(DiWeightedGraph, dijkstra_from_source_to_all_nodes)
     {
         ASSERT_EQ(allDistances.at(i), checkAllDistancesForFive.at(i));
     }
-
 }

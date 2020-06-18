@@ -2,8 +2,8 @@
 
 int main(int argc, char **argv)
 {
-    // initialize
+    // Initialize
     ::testing::InitGoogleTest(&argc, argv);
-    // run
+    // Run Tests
     return RUN_ALL_TESTS();
 }

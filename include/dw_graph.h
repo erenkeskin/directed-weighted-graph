@@ -30,7 +30,7 @@ class DirectedWeightedGraph
 private:
     int totalNodeCount = -1;
     bool visited = false;
-    bool is_acyclicGraph(int visitingNode, bool visitedNode[], bool *recursiveStack); // used in isCyclic() function
+    bool is_acyclicGraph(int visitingNode, bool visitedNode[], bool *recursiveStack); // used in is_acyclic() function
 
 public:
     vector<vector<pair<int, int>>> adjacencyList; // List of all nodes and connections
@@ -43,25 +43,27 @@ public:
     // Destructor
     ~DirectedWeightedGraph();
 
+    // Node Count getter/setter
     void set_nodeCount(int nodeCount);
     int get_nodeCount(void);
 
+    // Is that value is really exist
     int existance_check(int source, int destination);
     int existance_check(vector<Edge> &edges);
 
-    int add_node();
-    int remove_node();
-
+    // Adding new Edges
     int add_edge(int source, int destination, int weight);
     int add_edge(vector<Edge> &edges);
 
+    // Removing Edge
     int remove_edge(int source, int destination);
 
-    bool is_edge(int source, int destination);
-    bool is_acyclic(void); // returns true if there is a cycle in this graph
+    bool is_edge(int source, int destination); // Is really pre-generated edge
+    bool is_acyclic(void);                     // Returns true if there is a cycle in Graph
 
-    friend void printGraph(DirectedWeightedGraph graph);
+    friend void printGraph(DirectedWeightedGraph graph); // Print Graph
 
+    // Calculate shorthest path with Dijkstra Algorithm
     friend int dijkstra(DirectedWeightedGraph graph, vector<int> &allDistances, int source);
     friend int dijkstra(DirectedWeightedGraph graph, int source, int destination);
 };

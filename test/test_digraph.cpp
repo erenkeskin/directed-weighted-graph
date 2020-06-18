@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 #include <climits>
-#include "../inc/dw_graph.h"
+#include "../include/dw_graph.h"
 
 class DiWeightedGraph : public testing::Test
 {

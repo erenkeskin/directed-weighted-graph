@@ -1,0 +1,5 @@
+add_subdirectory(acylic_graph)
+add_subdirectory(dijkstra_for_all_nodes)
+add_subdirectory(dijkstra_simple_graph)
+add_subdirectory(graph_with_vector_edge)
+add_subdirectory(simple_graph)

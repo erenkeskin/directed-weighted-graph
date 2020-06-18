@@ -33,21 +33,21 @@ int main(int argc, char **argv)
     //
     if (acyclic_di_graph.is_acyclic())
     {
-        cout << "Graph is acyclic";
+        cout << "Graph is acyclic" << endl;
     }
     else
     {
-        cout << "Graph is not acyclic";
+        cout << "Graph is not acyclic" << endl;
     }
 
     //
     if (not_acyclic_di_graph.is_acyclic())
     {
-        cout << "Graph is acyclic";
+        cout << "Graph is acyclic" << endl;
     }
     else
     {
-        cout << "Graph is not acyclic";
+        cout << "Graph is not acyclic" << endl;
     }
 
     return 0;

@@ -450,6 +450,7 @@ int dijkstra(DirectedWeightedGraph graph, int source, int destination)
 
 /**
  * Helper and recursive function for checking acyclic graph
+ * Reference: https://www.geeksforgeeks.org/detect-cycle-in-a-graph/
  *
  * @param visitingNode node is already visiting
  * @param visitedNode list of all visited nodes

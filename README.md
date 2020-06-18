@@ -1,6 +1,6 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/erenkeskin/directed-weighted-graph/images/directed-weighted-graph-1.jpg" />
-  <img src="https://raw.githubusercontent.com/erenkeskin/directed-weighted-graph/images/directed-weighted-graph-2.jpg" />
+  <img src="https://raw.githubusercontent.com/erenkeskin/directed-weighted-graph/master/images/directed-weighted-graph-1.jpg" />
+  <img src="https://raw.githubusercontent.com/erenkeskin/directed-weighted-graph/master/images/directed-weighted-graph-2.jpg" />
 </p>
 
 Directed and Weighted Graph implementation with C++, checking acyclic graph and finding shortest path weight with Dijkstra Algoritm. All functions are already tested.

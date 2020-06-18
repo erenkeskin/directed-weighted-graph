@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="https://github.com/erenkeskin/directed-weighted-graph/images/directed-weighted-graph-1.jpg" />
+  <img src="https://github.com/erenkeskin/directed-weighted-graph/images/directed-weighted-graph-2.jpg" />
+</p>
+
 Directed and Weighted Graph implementation with C++, checking acyclic graph and finding shortest path weight with Dijkstra Algoritm. All functions are already tested.
 
 ## Build
@@ -54,21 +59,23 @@ cd build && ./main
 ## Directed Weighted Graph Defination
 Graph notation that is used to represent the connection between pairs of objects. It consists of:
 
-A set of nodes, which are also known as nodes. It represents like N.
-A set of edges, which are the links that connect the nodes. It represents like E.
+    A set of nodes, which are also known as nodes. It represents like N.
+
+    A set of edges, which are the links that connect the nodes. It represents like E.
 
 Also graphs has to general type:
 
-Directed Graph: Which edges has a direction to connect to another node
-Undirected Graph: Which all graph connected to each other without any direction. It is like bi-directional graph
+    Directed Graph: Which edges has a direction to connect to another node
+
+    Undirected Graph: Which all graph connected to each other without any direction. It is like bi-directional graph
 
 In this repository, our goal is to implement an simple directed graph with weighted edges. Weight is the distance between two connected nodes.
 
 There is two main methods for representing Directed Weighted Graphs:
     
-Adjacency Matrix: generating graph to help with two-dimensional array. Memory Usage: O(n^2)
+    Adjacency Matrix: generating graph to help with two-dimensional array. Memory Usage: O(n^2)
 
-Adjacency List: generating graph to help with an array of lists. Size is equal to total node size. Memory Usage: O(n+e)
+    Adjacency List: generating graph to help with an array of lists. Size is equal to total node size. Memory Usage: O(n+e)
 
 I choose "Adjacency List" method for implementing for this repository.
 
@@ -76,9 +83,9 @@ Path = a sequence "n1, n2, ... nN" such that (ni, ni+1) is in E for i = 1,2,...,
 
 In a Directed Graph
 
-Cycle = a path of length at least 1 such that n1 = nN
+    Cycle = a path of length at least 1 such that n1 = nN
 
-Simple Cycle = simple path that is also a cycle
+    Simple Cycle = simple path that is also a cycle
 
 Directed Acyclic Graph (DAG) = A directed graph with no cycles.
 
@@ -94,6 +101,7 @@ Unfortunately, the algorithm does not work successfully if there is an edge with
 - [dijkstra_simple_graph]
 - [dijkstra_for_all_nodes]
 - [acylic_graph]
+- For running examples: cd example/{EXAMPLE_FOLDER_NAME} && ./EXAMPLE_FOLDER_NAME
 
 ## References
 - [Berkeley Univercity]

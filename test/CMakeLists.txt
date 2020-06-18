@@ -16,9 +16,6 @@ ExternalProject_Add(
 # Get GTest source and binary directories from CMake project
 ExternalProject_Get_Property(gtest source_dir binary_dir)
 
-message(${source_dir})
-message(${binary_dir})
-
 # Create a libgtest target to be used as a dependency by test programs
 add_library(libgtest IMPORTED STATIC GLOBAL)
 add_dependencies(libgtest gtest)

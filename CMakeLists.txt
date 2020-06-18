@@ -28,3 +28,4 @@ file(GLOB SOURCES "src/*.cpp")
 add_executable(main ${SOURCES})
 
 add_subdirectory(test)
+add_subdirectory(examples)

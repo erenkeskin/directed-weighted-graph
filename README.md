@@ -22,6 +22,23 @@ cd build && ./main
 ## File Structure
 
     ├── directed-weighted-graph         # main folder of project
+        ├── examples
+        │   └── acylic_graph            # Example for acyclic graph
+        │       ├── CMakeList.txt           # CMake defination for the acylic_graph folder  
+        │       └── acylic_graph.cpp    # acyclic graph file    
+        │   └── dijkstra_for_all_nodes            # Example for dijkstra algorithm for all node
+        │       ├── CMakeList.txt           # CMake defination for the dijkstra_for_all_nodes folder 
+        │       └── dijkstra_for_all_nodes.cpp    # dijkstra algorithm file    
+        │   └── dijkstra_simple_graph            # Example for dijkstra algorithm for spesific nodes 
+        │       ├── CMakeList.txt           # CMake defination for the dijkstra_simple_graph folder
+        │       └── dijkstra_simple_graph.cpp    # dijkstra algorithm file  
+        │   └── simple_graph            # Example for simple graph implementation
+        │       ├── CMakeList.txt           # CMake defination for the simple_graph folder
+        │       └── simple_graph.cpp    # simple graph file    
+        │   └── graph_with_vector_edge            # Example for graph implementation with edges vector
+        │       ├── CMakeList.txt           # CMake defination for the graph_with_vector_edge folder
+        │       └── graph_with_vector_edge.cpp    # vector edge file
+        │   ├── CMakeList.txt           # CMake defination for the whole examples folder    
         ├── include
         │   └── dw_graph.h              # Directed Weight Graph Header File              
         ├── src
@@ -58,16 +75,29 @@ Dijkstra Algorithm is an algorithm to find shortest path in a graph from source 
 Unfortunately, the algorithm does not work successfully if there is an edge with a negative (-) value. This is because the edge in the minus (-) value constantly produces a better result than the current situation, and the algorithm has never been stable.
 
 ## Examples
-simple_graph
-graph_with_vector_edge
-dijkstra_simple_graph
-dijkstra_for_all_nodes
-acylic_graph
+    - [simple_graph]
+    - [graph_with_vector_edge]
+    - [dijkstra_simple_graph]
+    - [dijkstra_for_all_nodes]
+    - [acylic_graph]
 
 ## References
-img-1 https://www.grasshopper3d.com/forum/topics/adjacency-matrix-to-a-weighted-directed-graph
-img-2 https://algorithms.tutorialhorizon.com/weighted-graph-implementation-java/
-GoogleTest for CMake : https://github.com/YouYue123/GoogleTest-With-CMake
-Description https://study.com/academy/lesson/weighted-graphs-implementation-dijkstra-algorithm.html
-https://people.eecs.berkeley.edu/~nirkhe/cs38notes/graph.pdf
-https://condor.depaul.edu/glancast/393class/docs/lecMay25.html
+- [Berkeley Univercity]
+- [Depaul Univercity]
+- [Study.com]
+- [GoogleTest for CMake]
+- [Directed Weighted Graph - 1]
+- [Directed Weighted Graph - 2]
+
+[simple_graph]: <https://github.com/erenkeskin/directed-weighted-graph/examples/simple_graph>
+[graph_with_vector_edge]: <https://github.com/erenkeskin/directed-weighted-graph/examples/graph_with_vector_edge>
+[dijkstra_simple_graph]: <https://github.com/erenkeskin/directed-weighted-graph/examples/dijkstra_simple_graph>
+[dijkstra_for_all_nodes]: <https://github.com/erenkeskin/directed-weighted-graph/examples/dijkstra_for_all_nodes>
+[acylic_graph]: <https://github.com/erenkeskin/directed-weighted-graph/examples/acylic_graph>
+
+[Berkeley Univercity]: <https://people.eecs.berkeley.edu/~nirkhe/cs38notes/graph.pdf>
+[Depaul Univercity]: <https://condor.depaul.edu/glancast/393class/docs/lecMay25.html>
+[Study.com]: <https://study.com/academy/lesson/weighted-graphs-implementation-dijkstra-algorithm.html>
+[GoogleTest for CMake]: <https://github.com/YouYue123/GoogleTest-With-CMake>
+[Directed Weighted Graph - 1]: <https://www.grasshopper3d.com/forum/topics/adjacency-matrix-to-a-weighted-directed-graph>
+[Directed Weighted Graph - 2]: <https://algorithms.tutorialhorizon.com/weighted-graph-implementation-java/>

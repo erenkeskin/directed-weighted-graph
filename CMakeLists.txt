@@ -18,9 +18,11 @@ set(PROJECT_TEST_DIR ${PROJECT_SOURCE_DIR}/test)
 set(PROJECT_EXAMPLE_DIR ${PROJECT_SOURCE_DIR}/examples)
 
 include_directories(${PROJECT_INCLUDE_DIR})
-
-# Add subdirectories to project
-add_subdirectory(include)
-add_subdirectory(src)
-add_subdirectory(test)
-add_subdirectory(examples)
+ 
+#Bring the headers, such as Student.h into the project
+include_directories(include)
+  
+#However, the file(GLOB...) allows for wildcard additions:
+file(GLOB SOURCES "src/*.cpp")
+ 
+add_executable(main ${SOURCES})
